@@ -60,3 +60,56 @@ struct Tarjan{
         }
     }
 };
+
+struct Kosaraju{
+	using ll=long long;
+    ll n,m,numSCC;
+    vector<ll>adj[100001],rev[100001],order,scc[100001];
+    bool vis[100001];
+    void input(){
+        cin>>n>>m;
+        while(m--){
+            ll a,b;
+            cin>>a>>b;
+            adj[a].push_back(b);
+            rev[b].push_back(a);
+        }
+    }
+    void init(){
+        for(int i=1;i<=100001;i++)
+            adj[i].clear(),rev[i].clear(),scc[i].clear();
+        order.clear();
+        memset(vis,0,sizeof(vis));
+        numSCC=1;
+    }
+    void Solve(){
+        for(int i=1;i<=n;i++){
+            if(!vis[i])
+                dfs(i);
+        }
+        memset(vis,0,sizeof(vis));
+        for(int i=n-1;i>=0;i--){
+            if(!vis[order[i]]){
+                dfs_rev(order[i]);
+                numSCC++;
+            }
+        }
+    }
+    void dfs(ll node){
+        vis[node]=1;
+        for(auto i : adj[node]){
+            if(!vis[i])
+                dfs(i);
+        }
+        order.push_back(node);
+    }
+    void dfs_rev(ll node){
+        vis[node]=1;
+        scc[numSCC].push_back(node);
+        for(auto i : rev[node]){
+            if(!vis[i]){
+                dfs_rev(i);
+            }
+        }
+    }
+};
