@@ -55,4 +55,47 @@ struct Tree{
         }
         return ans;
     }
+    void InorderTraversal(Node* head,arr& ans){
+        if(head->left){
+            InorderTraversal(head->left,ans);
+        }
+        ans.pb(head->val);
+        if(head->right){
+            InorderTraversal(head->right,ans);
+        }
+    }
+    arr InorderTraversal(){
+        arr ans;
+        InorderTraversal(head,ans);
+        return ans;
+    }
+    void PreorderTraversal(Node* head,arr& ans){
+        ans.pb(head->val);
+        if(head->left){
+            PreorderTraversal(head->left,ans);
+        }
+        if(head->right){
+            PreorderTraversal(head->right,ans);
+        }
+    }
+    arr PreorderTraversal(){
+        arr ans;
+        PreorderTraversal(head,ans);
+        return ans;
+    }
+    void PostorderTraversal(Node* head,arr& ans){
+        if(head->left){
+            PostorderTraversal(head->left,ans);
+        }
+        if(head->right){
+            PostorderTraversal(head->right,ans);
+        }
+        ans.pb(head->val);
+    }
+    arr PostorderTraversal(){
+        arr ans;
+        PostorderTraversal(head,ans);
+        return ans;
+    }
+    
 };
