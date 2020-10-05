@@ -19,24 +19,16 @@ struct Tree{
         return ;
     }
     void CreateNode(Node* head,ll val){
-        if(head->left==NULL and head->right==NULL){
-            if(head->val > val){
+        if(head->val>val){
+            if(head->left==NULL){
                 newNode(head->left,val);
-            }else{
-                newNode(head->right,val);
-            }
+            }else
+                CreateNode(head->left,val);
         }else{
-            if(head->val>val){
-                if(head->left==NULL){
-                    newNode(head->left,val);
-                }else
-                    CreateNode(head->left,val);
-            }else{
-                if(head->right==NULL){
-                    newNode(head->right,val);
-                }else
-                    CreateNode(head->right,val);
-            }
+            if(head->right==NULL){
+                newNode(head->right,val);
+            }else
+                CreateNode(head->right,val);
         }
     }
     void CreateNode(ll val){
