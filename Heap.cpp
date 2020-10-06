@@ -43,15 +43,22 @@ struct Heap{
     }
     //return max element and delete it 
     ll extract_max(){
-        ll st=heap[0];
-        heap[0]=heap[h_size];
+        ll st=heap[1];
+        heap[1]=heap[h_size];
         h_size--;
-        max_heapify(0);
+        max_heapify(1);
         return st; 
     }
     void showArr(){
         for(int i=1;i<=h_size;i++)
             cout<<heap[i]<<" ";
         cout<<endl;
+    }
+    arr heap_sort(){
+        arr ans;
+        while(h_size>=1){
+            ans.pb(extract_max());
+        }
+        return ans;
     }
 };
